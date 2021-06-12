@@ -1,38 +1,82 @@
 ﻿
-@{
-    Layout = null;
+@{     
+    ViewData["Title"] = "Home";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <link href="~/css/site.css" rel="stylesheet" />
-    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
-</head>
-    
-<body class="container">
+<section class="jumbotron text-center" >
+    <div class="container">
+
+        <h1>Welcome to BookStore</h1>
+        <p class="lead text-muted">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+        <p>
+            <a href="#" class="btn btn-primary my-2">Search books</a>
+        </p>
+    </div>
+</section>
+
+<div class="py-5 bg-light">
+    <div class="container">
+        <h3 class="h3">Top Books</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" style="height: 225px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22285%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20285%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1792504b2b6%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1792504b2b6%22%3E%3Crect%20width%3D%22285%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22106.6953125%22%20y%3D%2296.375%22%3E285x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                    <div class="card-body">
+                        <p class="card-text"> this section will be used to display the short description of Book</p>
+                        <div class="d-flex justify-content-between align-content-center">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">View details</a>
+                            </div>
+                            <small class="text-muted"> Author name</small>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" style="height: 225px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22285%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20285%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1792504b2b6%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1792504b2b6%22%3E%3Crect%20width%3D%22285%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22106.6953125%22%20y%3D%2296.375%22%3E285x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                    <div class="card-body">
+                        <p class="card-text"> this section will be used to display the short description of book</p>
+                        <div class="d-flex justify-content-between align-content-center">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">View details</a>
+                            </div>
+                            <small class="text-muted"> Author name</small>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" style="height: 225px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22285%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20285%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1792504b2b6%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1792504b2b6%22%3E%3Crect%20width%3D%22285%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22106.6953125%22%20y%3D%2296.375%22%3E285x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                    <div class="card-body">
+                        <p class="card-text"> this section will be used to display the short description of book</p>
+                        <div class="d-flex justify-content-between align-content-center">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">View details</a>
+                            </div>
+                            <small class="text-muted"> Author name</small>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
 
 
-          <img src="~/images/logo.png" class="logo" alt="Logo" />
-            
-        <input type="button" value="Click me" class="btn btn-danger" />
-        <h1 class="h1"> Welcome to Book store application</h1>
-        <p> this is the home page of our book store application</p>
+        </div>
 
-</body>
+    </div>
 
-<script src="~/lib/jquery/jquery.js"></script>
+</div>
 
-</html>
-
-<script>
-    $(document).ready(function ()
-    {
-        alert("page loaded");
-
-    }
-        );
-</script>

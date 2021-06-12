@@ -1,4 +1,6 @@
-﻿using BookStore.Models;
+﻿using BookStore.Data;
+using BookStore.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,36 +10,100 @@ namespace BookStore.Repository
 {
     public class BookRepository
     {
-        public List<BookModel> GetAllBooks()
-        {
-            return DataSource();
-        }
+        private readonly BookStoreContext _context = null;
 
-        public BookModel GetBookById(int id)
+        public BookRepository(BookStoreContext context)
         {
-            return DataSource().Where(x => x.Id == id).FirstOrDefault();
+            _context = context;
 
         }
-
-        public List<BookModel> SearchBook(string title , string AuthorName)
+        public async Task<int> AddNewBook(BookModel model)
         {
-            return DataSource().Where(x => x.Title.Contains(title) || x.Author.Contains(AuthorName)).ToList();
-
-        }
-
-
-        private List<BookModel> DataSource()
-        {
-            return new List<BookModel>()
+            var newBook = new Books
             {
-                new BookModel (){Id=1, Title="MVC", Author="Ahmed"},
-                new BookModel (){Id=2, Title=".Net Core", Author="Ahmed"},
-                new BookModel (){Id=3, Title="C#", Author="Mahmoud"},
-                new BookModel (){Id=4, Title="Java", Author="mohamed"},
-                new BookModel (){Id=5, Title="PHP", Author="mohamed"}
-
+                Author = model.Author,
+                CreatedOn = DateTime.UtcNow,
+                Description = model.Description,
+                Title = model.Title,
+                LanguageId = model.LanguageId,
+                TotalPages = model.TotalPages.HasValue ? model.TotalPages.Value : 0,
+                UpdatedOn = DateTime.UtcNow
             };
+            await _context.Books.AddAsync(newBook);
+            await _context.SaveChangesAsync();
+
+            return newBook.Id;
         }
+
+
+        public async Task<List<BookModel>> GetAllBooks()
+        {
+            //var books = new List<BookModel>();
+            //var allbooks = await _context.Books.ToListAsync();
+
+            //if(allbooks?.Any() == true )
+            //{
+            //    foreach (var book in allbooks)
+            //    {
+            //        books.Add(new BookModel()
+            //        {   
+            //            Author=book.Author,
+            //            Category=book.Category,
+            //            Id=book.Id,
+            //            LanguageId=book.LanguageId,
+            //            Language=book.Language.Name,
+            //            Title=book.Title,
+            //            TotalPages=book.TotalPages
+            //        });
+
+            //    }
+
+            //}
+            //return books;
+
+            return await _context.Books.Select(book => new BookModel()
+            {
+                Author = book.Author,
+                Category = book.Category,
+                Id = book.Id,
+                Description = book.Description,
+                LanguageId = book.LanguageId,
+                Language = book.Language.Name,
+                Title = book.Title,
+                TotalPages = book.TotalPages
+
+            }).ToListAsync();
+
+        }
+
+        public async Task<BookModel> GetBookById(int id)
+        {
+            return await _context.Books.Where(x => x.Id == id)
+                .Select(book => new BookModel()
+
+                {
+                    Author = book.Author,
+                    Category = book.Category,
+                    Id = book.Id,
+                    Description = book.Description,
+                    LanguageId = book.LanguageId,
+                    Language = book.Language.Name,
+                    Title = book.Title,
+                    TotalPages = book.TotalPages
+
+                }).FirstOrDefaultAsync();
+
+        }
+
+        public List<BookModel> SearchBook(string title, string AuthorName)
+        {
+            return null;
+
+        }
+
+
+
+
 
 
     }

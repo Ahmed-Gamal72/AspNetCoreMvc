@@ -10,6 +10,7 @@ namespace BookStore.Controllers
     {
         public ViewResult Index()
         {
+
             return View();
         }
 
@@ -18,7 +19,7 @@ namespace BookStore.Controllers
             return View();
         }
 
-        public ViewResult ContacttUs()
+        public ViewResult ContactUs()
         {
             return View();
         }
