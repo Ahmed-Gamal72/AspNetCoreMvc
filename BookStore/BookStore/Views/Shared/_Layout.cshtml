@@ -74,19 +74,28 @@
     <footer class="border-top footer text-muted text-center">
         <div class="container">
             Copyright &copy; Book store @DateTime.Now.Year
+            <custom-email my-email="ahmd@gmail.com"></custom-email>
         </div>
     </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/jquery.js"></script>
+        <script src="~/jquery-validate/jquery.validate.js"></script>
+        <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
     </environment>
 
     <environment exclude="Development">
         <script src="~/lib/jquery/jquery.min.js"></script>
+        <script src="~/jquery-validate/jquery.validate.min.js"></script>
+        <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
     </environment>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    @*@RenderSection("scripts", required: false);*@
+
 </body>
 </html>

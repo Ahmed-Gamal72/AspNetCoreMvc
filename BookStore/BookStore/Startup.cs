@@ -24,6 +24,12 @@ namespace BookStore
             services.AddControllersWithViews();
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
+                
+            //this code to disable clint side validations
+            //    .AddViewOptions(options =>
+            //{
+            //    options.HtmlHelperOptions.ClientValidationEnabled = false;
+            //});
 #endif
             services.AddScoped<BookRepository, BookRepository>();
             services.AddScoped<LanguageRepository, LanguageRepository>();
