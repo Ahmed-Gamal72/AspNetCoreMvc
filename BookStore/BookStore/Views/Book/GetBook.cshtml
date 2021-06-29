@@ -27,7 +27,7 @@
 
 
                     }
-                     
+
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -69,9 +69,9 @@
             <div class="row">
                 <div class="col-md-4">
 
-                    <button class="btn btn-outline-primary">
+                    <a class="btn btn-outline-primary" href="@Model.BookPdfUrl" target="_blank" >
                         Read now
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -85,6 +85,31 @@
             </ul>
         </div>
     </div>
+
+    <!-- Button trigger modal -->
+    <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button>-->
+
+    <!-- Modal -->
+    <!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">-->
+                    @*<embed src="@Model.BookPdfUrl" class="w-100" />*@
+                    <!--<iframe src="@Model.BookPdfUrl" class="w-100"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+
 
     <hr />
 

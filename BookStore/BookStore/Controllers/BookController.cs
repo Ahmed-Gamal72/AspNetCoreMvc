@@ -64,7 +64,7 @@ namespace BookStore.Controllers
             {
                 if (bookModel.CoverPhoto != null)
                 {
-                    string folder = "books/cover/";
+                    string folder = "books/pdf/";
 
                     bookModel.CoverImageUrl = await UploadImage(folder, bookModel.CoverPhoto);
                 }
@@ -85,6 +85,13 @@ namespace BookStore.Controllers
                         bookModel.Gallery.Add(gallery);
                     }
 
+                }
+
+                if (bookModel.BookPdf != null)
+                {
+                    string folder = "books/cover/";
+
+                    bookModel.BookPdfUrl = await UploadImage(folder, bookModel.BookPdf);
                 }
 
 
