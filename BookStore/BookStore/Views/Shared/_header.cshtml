@@ -1,9 +1,10 @@
-﻿<header>
+﻿@inject BookStore.Repository.IBookRepository _bookRepo
+<header>
     <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3 navbar-toggler">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <img src="~/images/logo.png" width="40" height="40" asp-append-version="true" />
-                Book store
+                @_bookRepo.GetAppName()
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

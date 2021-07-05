@@ -12,27 +12,30 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
+    [Route("[controller]/[action]")]
     public class BookController : Controller
     {
-        private readonly BookRepository _bookRepository = null;
-        private readonly LanguageRepository _LanguageRepository = null;
+        private readonly IBookRepository _bookRepository = null;
+        private readonly ILanguageRepository _LanguageRepository = null;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public BookController(BookRepository bookRepository,
-            LanguageRepository languageRepository,
+        public BookController(IBookRepository bookRepository,
+            ILanguageRepository languageRepository,
             IWebHostEnvironment webHostEnvironment)
         {
             _bookRepository = bookRepository;
             _LanguageRepository = languageRepository;
             _webHostEnvironment = webHostEnvironment;
         }
+
+        [Route("~/all-books")]
         public async Task<ViewResult> GetAllBooks()
         {
             var data = await _bookRepository.GetAllBooks();
 
             return View(data);
         }
-
+        [Route("~/book-detail/{id:int:min(1)}",Name ="bookDetailsRoute")]
         public async Task<ViewResult> GetBook(int id)
         {
             var data = await _bookRepository.GetBookById(id);
@@ -51,7 +54,7 @@ namespace BookStore.Controllers
                 //Language = "2"
             };
 
-            ViewBag.language = new SelectList(await _LanguageRepository.GetLanguages(), "Id", "Name");
+           // ViewBag.language = new SelectList(await _LanguageRepository.GetLanguages(), "Id", "Name");
 
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
@@ -103,7 +106,7 @@ namespace BookStore.Controllers
                 }
             }
 
-            ViewBag.language = new SelectList(await _LanguageRepository.GetLanguages(), "Id", "Name");
+           // ViewBag.language = new SelectList(await _LanguageRepository.GetLanguages(), "Id", "Name");
 
 
             return View();

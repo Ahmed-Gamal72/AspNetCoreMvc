@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Repository
 {
-    public class BookRepository
+    public class BookRepository : IBookRepository
     {
         private readonly BookStoreContext _context = null;
 
@@ -28,8 +28,8 @@ namespace BookStore.Repository
                 LanguageId = model.LanguageId,
                 TotalPages = model.TotalPages.HasValue ? model.TotalPages.Value : 0,
                 UpdatedOn = DateTime.UtcNow,
-                CoverImageUrl=model.CoverImageUrl,
-                BookPdfUrl=model.BookPdfUrl
+                CoverImageUrl = model.CoverImageUrl,
+                BookPdfUrl = model.BookPdfUrl
             };
 
             newBook.bookGallery = new List<BookGallery>();
@@ -37,8 +37,8 @@ namespace BookStore.Repository
             {
                 newBook.bookGallery.Add(new BookGallery()
                 {
-                    Name=file.Name,
-                    URL=file.URL
+                    Name = file.Name,
+                    URL = file.URL
                 });
 
             }
@@ -85,11 +85,34 @@ namespace BookStore.Repository
                 Language = book.Language.Name,
                 Title = book.Title,
                 TotalPages = book.TotalPages,
-                CoverImageUrl=book.CoverImageUrl
+                CoverImageUrl = book.CoverImageUrl
 
             }).ToListAsync();
 
         }
+
+
+        public async Task<List<BookModel>> GetTopBooksAsync(int count)
+        {
+
+            return await _context.Books.Select(book => new BookModel()
+            {
+                Author = book.Author,
+                Category = book.Category,
+                Id = book.Id,
+                Description = book.Description,
+                LanguageId = book.LanguageId,
+                Language = book.Language.Name,
+                Title = book.Title,
+                TotalPages = book.TotalPages,
+                CoverImageUrl = book.CoverImageUrl
+
+            }).Take(count).ToListAsync();
+
+        }
+
+
+
 
         public async Task<BookModel> GetBookById(int id)
         {
@@ -113,7 +136,7 @@ namespace BookStore.Repository
                         URL = g.URL
                     }
                     ).ToList(),
-                    BookPdfUrl=book.BookPdfUrl
+                    BookPdfUrl = book.BookPdfUrl
 
                 }).FirstOrDefaultAsync();
 
@@ -125,7 +148,11 @@ namespace BookStore.Repository
 
         }
 
+        public string GetAppName()
+        {
+            return "Book Store Application ";
 
+        }
 
 
 
