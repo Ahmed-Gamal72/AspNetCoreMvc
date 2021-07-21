@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookStore.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,18 @@ namespace BookStore.Controllers
 
     public class HomeController : Controller
     {
+        private readonly IConfiguration configuration;
+
+        public HomeController(IConfiguration _configuration)
+        {
+            configuration = _configuration;
+        }
         [Route("~/")]
         public ViewResult Index()
         {
+            var newBookAlert =  new NewBookAlertConfig();
+            configuration.Bind("NewBookALert", newBookAlert);
+            bool displaybook = newBookAlert.DisplayNewBookAlert;
 
             return View();
         }
