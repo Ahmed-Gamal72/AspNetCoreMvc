@@ -1,4 +1,5 @@
 ﻿using BookStore.Models;
+using BookStore.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -13,14 +14,18 @@ namespace BookStore.Controllers
     public class HomeController : Controller
     {
         private readonly IConfiguration configuration;
+        private readonly IUserService _userService;
 
-        public HomeController(IConfiguration _configuration)
+        public HomeController(IConfiguration _configuration,IUserService userService)
         {
             configuration = _configuration;
+            _userService = userService;
         }
         [Route("~/")]
         public ViewResult Index()
         {
+            var userid = _userService.GetUserId();
+            var IsLoggedIn = _userService.IsAuthenticated();
             var newBookAlert =  new NewBookAlertConfig();
             configuration.Bind("NewBookALert", newBookAlert);
             bool displaybook = newBookAlert.DisplayNewBookAlert;

@@ -44,5 +44,77 @@ namespace BookStore.Controllers
             }
             return View();
         }
+
+
+        [Route("Login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+
+        [Route("Login")]
+        [HttpPost]
+        public async Task<IActionResult> Login(SignInModel signInModel, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+             var result=  await _accountRepositiory.PasswordSignInAsync(signInModel);
+
+                if (result.Succeeded)
+                {
+                    if (!String.IsNullOrEmpty(returnUrl))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError("", "Invalid credentials");
+            }
+            return View(signInModel);
+        }
+
+        [Route("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _accountRepositiory.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+         [Route("change-password")]
+        public  IActionResult ChangePassword()
+        {
+            
+            return View();
+        }
+
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result =await _accountRepositiory.ChangePasswordAsync(model);
+                if (result.Succeeded)
+                {
+                    ViewBag.IsSuccess = true;
+                    ModelState.Clear();
+                    return View();
+
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+
+                }
+
+            }
+
+            return View(model);
+        }
+
     }
+
 }
