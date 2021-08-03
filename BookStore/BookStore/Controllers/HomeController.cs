@@ -15,15 +15,29 @@ namespace BookStore.Controllers
     {
         private readonly IConfiguration configuration;
         private readonly IUserService _userService;
+        private readonly IEmailService _emailService;
 
-        public HomeController(IConfiguration _configuration,IUserService userService)
+        public HomeController(IConfiguration _configuration,IUserService userService,IEmailService emailService)
         {
             configuration = _configuration;
             _userService = userService;
+            _emailService = emailService;
         }
         [Route("~/")]
-        public ViewResult Index()
+        public async Task<ViewResult> Index()
         {
+            //UserEmailOptions options = new UserEmailOptions
+            //{
+            //    ToEmails = new List<string>() { "test@gmail.com" },
+            //    PlaceHolders =new List<KeyValuePair<string, string>>()
+            //    {
+            //        new KeyValuePair<string, string>("{{UserName}}","Ahmed")
+            //    }
+            //};
+
+            //await _emailService.SendTestEmail(options);
+           
+
             var userid = _userService.GetUserId();
             var IsLoggedIn = _userService.IsAuthenticated();
             var newBookAlert =  new NewBookAlertConfig();

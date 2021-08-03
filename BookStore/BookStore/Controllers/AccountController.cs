@@ -41,8 +41,9 @@ namespace BookStore.Controllers
                     return View(userModel);
                 }
                 ModelState.Clear();
+                return RedirectToAction("ConfirmEmail", new { email = userModel.Email });
             }
-            return View();
+            return View(userModel);
         }
 
 
@@ -70,8 +71,15 @@ namespace BookStore.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+                if (result.IsNotAllowed)
+                {
+                    ModelState.AddModelError("", "Not Allowed to login");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid Credential");
 
-                ModelState.AddModelError("", "Invalid credentials");
+                }
             }
             return View(signInModel);
         }
@@ -115,6 +123,50 @@ namespace BookStore.Controllers
             return View(model);
         }
 
+
+        [HttpGet("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(string uid, string token, string email)
+        {
+            EmailConfirmModel model = new EmailConfirmModel
+            {
+                Email = email
+            };
+
+            if (!string.IsNullOrEmpty(uid) && !string.IsNullOrEmpty(token))
+            {
+                token = token.Replace(' ', '+');
+                var result = await _accountRepositiory.ConfirmEmailAsync(uid, token);
+                if (result.Succeeded)
+                {
+                    model.EmailVerified = true;
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpPost("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(EmailConfirmModel model)
+        {
+            var user = await _accountRepositiory.GetUserByEmailAsync(model.Email);
+            if (user != null)
+            {
+                if (user.EmailConfirmed)
+                {
+                    model.EmailVerified = true;
+                    return View(model);
+                }
+
+                await _accountRepositiory.GenerateEmailConfirmationTokenAsync(user);
+                model.EmailSent = true;
+                ModelState.Clear();
+            }
+            else
+            {
+                ModelState.AddModelError("", "Something went wrong.");
+            }
+            return View(model);
+        }
     }
 
 }
